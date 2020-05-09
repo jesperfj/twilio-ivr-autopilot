@@ -1,0 +1,104 @@
+{
+    "friendlyName" : "Inbound DTMF IVR",
+    "logQueries" : true,
+    "uniqueName" : "inbound",
+    "defaults" : {
+        "defaults" : {
+            "assistant_initiation" : "task://greeting",
+            "fallback" : "task://greeting",
+            "collect" : {
+                "validate_on_failure" : "task://greeting"
+            }
+        }
+    },
+    "styleSheet" : {
+        "style_sheet" : {
+            "voice" : {
+                "say_voice" : "Polly.Matthew"
+            },
+            "name" : ""
+        }
+    },
+    "fieldTypes" : [],
+    "tasks" : [
+        {
+            "uniqueName" : "support",
+            "actions" : {
+                "actions" : [
+                    {
+                        "say" : "Welcome to support. Press 1 to go back."
+                    },
+                    {
+                        "listen" : {
+                            "voice_digits" : {
+                                "redirects" : { "1" : "task://greeting" },
+                                "finish_on_key" : "#",
+                                "num_digits" : 1
+                            }
+                        }
+                    }
+                ]
+            },
+            "fields" : [],
+            "samples" : [
+                {
+                    "language" : "en-US",
+                    "taggedText" : "support"
+                }
+            ]
+        },
+        {
+            "uniqueName" : "sales",
+            "actions" : {
+                "actions" : [
+                    {
+                        "say" : "Welcome to sales. Press 1 to go back."
+                    },
+                    {
+                        "listen" : {
+                            "voice_digits" : {
+                                "redirects" : { "1" : "task://greeting" },
+                                "finish_on_key" : "#",
+                                "num_digits" : 1
+                            }
+                        }
+                    }
+                ]
+            },
+            "fields" : [],
+            "samples" : [
+                {
+                    "language" : "en-US",
+                    "taggedText" : "sales"
+                }
+            ]
+        },
+        {
+            "uniqueName" : "greeting",
+            "actions" : {
+                "actions" : [
+                    {
+                        "say" : "Hi, press 1 for sales and 2 for support."
+                    },
+                    {
+                        "listen" : {
+                            "voice_digits" : {
+                                "redirects" : {
+                                    "1" : "task://sales",
+                                    "2" : "task://support"
+                                },
+                                "finish_on_key" : "#",
+                                "num_digits" : 1
+                            }
+                        }
+                    }
+                ]
+            },
+            "fields" : [],
+            "samples" : []
+        }
+    ],
+    "modelBuild" : {
+        "uniqueName" : "inbound_8-5-2020_3.25.29pm"
+    }
+}
